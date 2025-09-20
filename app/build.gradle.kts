@@ -4,8 +4,14 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlinAndroidKsp)
     alias(libs.plugins.hiltAndroid)
+    alias(libs.plugins.apolloGraph)
 }
 
+apollo {
+    service("service") {
+        packageName.set("com.example")
+    }
+}
 android {
     namespace = "com.example.graphql"
     compileSdk = 36
