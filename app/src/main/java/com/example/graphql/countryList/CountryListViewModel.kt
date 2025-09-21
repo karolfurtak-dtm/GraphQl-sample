@@ -2,7 +2,6 @@ package com.example.graphql.countryList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.graphql.domain.CountryListItem
 import com.example.graphql.domain.repo.CountryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -16,11 +15,17 @@ class CountryListViewModel @Inject constructor(
     private val repository: CountryRepository
 ): ViewModel() {
 
-    val items: StateFlow<List<CountryListItem>> = flow {
-        emit(repository.getCountries())
+    val state: StateFlow<CountryListState> = flow {
+        emit(CountryListState.Loading)
+
+        try {
+            emit(CountryListState.Content(repository.getCountries()))
+        } catch (e: Exception) {
+            emit(CountryListState.Error(e.message.orEmpty()))
+        }
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Lazily,
-        initialValue = emptyList()
+        initialValue = CountryListState.Loading
     )
 }

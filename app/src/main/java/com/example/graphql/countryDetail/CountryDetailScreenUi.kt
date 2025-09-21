@@ -10,28 +10,34 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.graphql.domain.CountryDetail
+import com.example.graphql.ui.common.CenteredErrorIndicator
+import com.example.graphql.ui.common.CenteredLoadingIndicator
 
 @Composable
 fun CountryDetailScreenUi(
     modifier: Modifier = Modifier,
-    viewModel: CountryDetailViewModel,
+    state: CountryDetailState,
 ) {
-    val data = viewModel.data.collectAsStateWithLifecycle().value
+    when (state) {
+        is CountryDetailState.Loading -> CenteredLoadingIndicator(modifier = modifier)
 
-    data?.let {
-        Content(it, modifier)
+        is CountryDetailState.Content -> Content(state.data, modifier)
+
+        is CountryDetailState.Error -> CenteredErrorIndicator(modifier = modifier, text = state.message)
     }
 }
 
 @Composable
 private fun Content(
-    detail: CountryDetail,
+    detail: CountryDetail?,
     modifier: Modifier
 ) {
+    if (detail == null) return
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -80,4 +86,22 @@ private fun Content(
             )
         }
     }
+}
+
+@Preview
+@Composable
+private fun ContentPreview() {
+    val data = CountryDetail(
+        name = "Poland",
+        code = "PL",
+        emoji = "🇵🇱",
+        capital = "Warsaw",
+        languages = listOf(
+            CountryDetail.Language(
+                name = "Polish"
+            )
+        )
+    )
+
+    CountryDetailScreenUi(state = CountryDetailState.Content(data))
 }

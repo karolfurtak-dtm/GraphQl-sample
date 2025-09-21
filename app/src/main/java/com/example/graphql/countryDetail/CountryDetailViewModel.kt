@@ -2,7 +2,6 @@ package com.example.graphql.countryDetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.graphql.domain.CountryDetail
 import com.example.graphql.domain.repo.CountryRepository
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -19,12 +18,18 @@ class CountryDetailViewModel @AssistedInject constructor(
     private val repository: CountryRepository
 ) : ViewModel() {
 
-    val data: StateFlow<CountryDetail?> = flow {
-        emit(repository.getCountry(code = code))
+    val state: StateFlow<CountryDetailState> = flow {
+        emit(CountryDetailState.Loading)
+
+        try {
+            emit(CountryDetailState.Content(repository.getCountry(code = code)))
+        } catch (e: Exception) {
+            emit(CountryDetailState.Error(e.message.orEmpty()))
+        }
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Lazily,
-        initialValue = null
+        initialValue = CountryDetailState.Loading
     )
 
     @AssistedFactory
