@@ -65,6 +65,8 @@ dependencies {
     implementation(libs.kotlinx.serialization.core)
     implementation(libs.apollo.runtime)
     implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.compose)
+    implementation(libs.hilt.viewmodel.lifecycle)
     ksp(libs.hilt.compiler)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
