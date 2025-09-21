@@ -7,9 +7,9 @@ import kotlinx.serialization.Serializable
 data object CountryListScreen: NavKey
 
 @Serializable
-data class CountryDetailScreen(val code: CountryId): NavKey {
+data class CountryDetailScreen(val id: CountryId): NavKey {
 
     @JvmInline
     @Serializable
-    value class CountryId(val code: Int)
+    value class CountryId(val id: Int)
 }

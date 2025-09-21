@@ -6,8 +6,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
-import com.example.graphql.countryDetail.CountryDetailScreen
-import com.example.graphql.countryList.CountryListScreen
+import com.example.graphql.countryDetail.CountryDetailScreenUi
+import com.example.graphql.countryList.CountryListScreenUi
 
 @Composable
 fun NavigationRoot(
@@ -21,13 +21,19 @@ fun NavigationRoot(
             when (screen) {
                 is CountryListScreen -> {
                     NavEntry(key = screen) {
-                        CountryListScreen()
+                        CountryListScreenUi(
+                            onItemClick = {
+                                backStack.add(
+                                    CountryDetailScreen(id = CountryDetailScreen.CountryId(it))
+                                )
+                            }
+                        )
                     }
                 }
 
                 is CountryDetailScreen -> {
                     NavEntry(key = screen) {
-                        CountryDetailScreen()
+                        CountryDetailScreenUi(id = screen.id)
                     }
                 }
 
