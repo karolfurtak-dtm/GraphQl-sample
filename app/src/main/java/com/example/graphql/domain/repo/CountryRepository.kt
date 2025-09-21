@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 interface CountryRepository {
     suspend fun getCountries(): List<CountryListItem>
-    suspend fun getCountry(id: String): CountryDetail?
+    suspend fun getCountry(code: String): CountryDetail?
 }
 
 class CountryRepositoryImpl @Inject constructor(
@@ -22,8 +22,8 @@ class CountryRepositoryImpl @Inject constructor(
             ?: emptyList()
     }
 
-    override suspend fun getCountry(id: String): CountryDetail? {
-        return countryService.getCountry(id = id)
+    override suspend fun getCountry(code: String): CountryDetail? {
+        return countryService.getCountry(id = code)
             ?.toCountryDetail()
     }
 }

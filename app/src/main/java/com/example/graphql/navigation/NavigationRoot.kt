@@ -24,7 +24,7 @@ fun NavigationRoot(
                         CountryListScreenUi(
                             onItemClick = {
                                 backStack.add(
-                                    CountryDetailScreen(id = CountryDetailScreen.CountryId(it))
+                                    CountryDetailScreen(countryCode = CountryDetailScreen.CountryCode(id = it))
                                 )
                             }
                         )
@@ -33,7 +33,7 @@ fun NavigationRoot(
 
                 is CountryDetailScreen -> {
                     NavEntry(key = screen) {
-                        CountryDetailScreenUi(id = screen.id)
+                        CountryDetailScreenUi(id = screen.countryCode)
                     }
                 }
 
