@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlinAndroidKsp)
     alias(libs.plugins.hiltAndroid)
     alias(libs.plugins.apolloGraph)
+    alias(libs.plugins.jetbrains.kotlin.serialization)
 }
 
 apollo {

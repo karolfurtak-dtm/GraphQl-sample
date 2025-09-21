@@ -12,6 +12,7 @@ coroutinesBom = "1.10.2"
 nav3Core = "1.0.0-alpha09"
 lifecycleViewmodelNav3 = "1.0.0-alpha04"
 kotlinxSerializationCore = "1.9.0"
+kotlinSerialization = "2.1.21"
 hilt = "2.57.1"
 kspVersion = "2.2.10-2.0.2"
 apollo3 = "3.8.6"
@@ -52,4 +53,6 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 kotlinAndroidKsp = { id = "com.google.devtools.ksp", version.ref ="kspVersion" }
 hiltAndroid = { id = "com.google.dagger.hilt.android", version.ref ="hilt" }
 apolloGraph = { id = "com.apollographql.apollo3", version.ref ="apollo3" }
+jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization"}
+
 
