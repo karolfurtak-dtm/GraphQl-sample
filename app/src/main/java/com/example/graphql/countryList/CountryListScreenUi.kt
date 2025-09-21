@@ -23,7 +23,7 @@ import com.example.graphql.domain.CountryListItem
 @Composable
 fun CountryListScreenUi(
     modifier: Modifier = Modifier,
-    onItemClick: (Int) -> Unit
+    onItemClick: (String) -> Unit
 ) {
     val viewModel: CountryListViewModel = viewModel()
     val list = viewModel.items.collectAsStateWithLifecycle().value
@@ -37,7 +37,7 @@ fun CountryListScreenUi(
         ) { item ->
             CountryItem(
                 country = item,
-                onClick = { onItemClick(0) }
+                onClick = { onItemClick(it.code) }
             )
         }
     }
