@@ -12,32 +12,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.graphql.domain.CountryDetail
-import com.example.graphql.navigation.CountryDetailScreen.CountryCode
 
 @Composable
 fun CountryDetailScreenUi(
     modifier: Modifier = Modifier,
-    id: CountryCode
 ) {
-    val detail = CountryDetail(
-        name = "Polska",
-        capital = "Warszawa",
-        code = "PL",
-        emoji = "🇵🇱",
-        languages = listOf(
-            CountryDetail.Language("Polski"),
-            CountryDetail.Language("Angielski")
-        )
-    )
+    val viewModel: CountryDetailViewModel = viewModel()
+    val data = viewModel.data.collectAsStateWithLifecycle().value
 
-    Content(detail)
+    data?.let {
+        Content(it, modifier)
+    }
 }
 
 @Composable
 private fun Content(
     detail: CountryDetail,
-    modifier: Modifier = Modifier
+    modifier: Modifier
 ) {
     Column(
         modifier = modifier
