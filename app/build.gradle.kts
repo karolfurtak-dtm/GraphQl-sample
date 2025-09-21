@@ -2,10 +2,10 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlinAndroidKsp)
-    alias(libs.plugins.hiltAndroid)
-    alias(libs.plugins.apolloGraph)
-    alias(libs.plugins.jetbrains.kotlin.serialization)
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.apollo.graphql)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 apollo {
@@ -13,6 +13,7 @@ apollo {
         packageName.set("com.example")
     }
 }
+
 android {
     namespace = "com.example.graphql"
     compileSdk = 36
@@ -66,7 +67,6 @@ dependencies {
     implementation(libs.apollo.runtime)
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.compose)
-    implementation(libs.hilt.viewmodel.lifecycle)
     ksp(libs.hilt.compiler)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
