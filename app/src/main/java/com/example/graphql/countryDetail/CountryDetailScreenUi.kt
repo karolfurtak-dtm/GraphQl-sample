@@ -13,14 +13,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.graphql.domain.CountryDetail
 
 @Composable
 fun CountryDetailScreenUi(
     modifier: Modifier = Modifier,
+    viewModel: CountryDetailViewModel,
 ) {
-    val viewModel: CountryDetailViewModel = viewModel()
     val data = viewModel.data.collectAsStateWithLifecycle().value
 
     data?.let {

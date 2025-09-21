@@ -16,16 +16,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.graphql.domain.CountryListItem
 
 @Composable
 fun CountryListScreenUi(
     modifier: Modifier = Modifier,
-    onItemClick: (String) -> Unit
+    onItemClick: (String) -> Unit,
 ) {
-    val viewModel: CountryListViewModel = viewModel()
+    val viewModel: CountryListViewModel = hiltViewModel()
     val list = viewModel.items.collectAsStateWithLifecycle().value
 
     LazyColumn(
