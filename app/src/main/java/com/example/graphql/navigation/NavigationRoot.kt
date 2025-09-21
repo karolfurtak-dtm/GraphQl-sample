@@ -51,8 +51,9 @@ fun NavigationRoot(
                         val viewModel = hiltViewModel<CountryDetailViewModel, CountryDetailViewModel.Factory>(
                             creationCallback = { factory -> factory.create(code = screen.countryCode.id) }
                         )
+                        val state = viewModel.state.collectAsStateWithLifecycle().value
 
-                        CountryDetailScreenUi(viewModel = viewModel)
+                        CountryDetailScreenUi(state = state)
                     }
                 }
 
