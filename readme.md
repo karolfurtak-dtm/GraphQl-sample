@@ -35,4 +35,4 @@ This project leverages modern Android libraries and tools:
 ---
 
 ## 🎥 Demo
-![Demo](./assets/app_video.mp4)
+![Demo](./assets/app_video.gif)
