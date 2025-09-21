@@ -16,7 +16,7 @@ class CountryListViewModel @Inject constructor(
     private val repository: CountryRepository
 ): ViewModel() {
 
-    val countries: StateFlow<List<CountryListItem>> = flow {
+    val items: StateFlow<List<CountryListItem>> = flow {
         emit(repository.getCountries())
     }.stateIn(
         scope = viewModelScope,
